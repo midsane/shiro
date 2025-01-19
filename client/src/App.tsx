@@ -1,17 +1,23 @@
 import { RecoilRoot } from 'recoil'
-import { Main } from './components/main'
-import { Sidebar } from './components/sidebar'
-import { OuterModal } from './components/outerModal'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { ProfileScreen } from './screens/profile'
+import { GameScreen } from './screens/game'
+
+const router = createBrowserRouter([
+  {
+    path: "/profile", element: <ProfileScreen />
+  },
+  {
+    path: "/game", element: <GameScreen />
+  }
+])
 
 function App() {
-  
+
   return (
     <RecoilRoot>
-      <div className='w-screen h-screen overflow-hidden flex justify-end' >
-       <OuterModal />
-        <Sidebar />
-        <Main />
-      </div>
+      <RouterProvider router={router}>
+      </RouterProvider>
     </RecoilRoot>
   )
 }
