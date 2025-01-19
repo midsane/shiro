@@ -1,35 +1,22 @@
-import { useRecoilValue } from "recoil"
-import { sidebarOpenAtom } from "../atoms/atoms"
-import {ExternalLink} from "lucide-react"
+import {ExternalLink, Flag, ArrowBigUp} from "lucide-react"
 
 export const Main = () => {
-    const sidebarOpen = useRecoilValue(sidebarOpenAtom);
-    return(<div className={`h-full bg-zinc-900 ${sidebarOpen ? "w-[80vw]": "w-screen"} `}>
+   
+    return(<div className={`h-full bg-zinc-900 w-screen `}>
         <div className=" h-1/2 relative overflow-hidden rounded bg-black">
             <img 
             className="w-full opacity-50"
             src="https://i.pinimg.com/736x/c4/6d/09/c46d09dcbfd86ce160651ef5e877a7fc.jpg" />
-            <div className="w-[70%] rounded-3xl flex justify-between translate-x-1/2 right-1/2 p-10 h-min-10 bg-black absolute bottom-2 border border-stone-700 " >
+            <div className="w-[70%] rounded-3xl flex justify-between translate-x-1/2 right-1/2 p-10 h-min-10 bg-black absolute bottom-0 border border-stone-700 " >
                 <div className="w-1/3 flex " >
-                    <div className="border-r-2 flex flex-col px-10  gap-2 border-stone-600">
-                        <p>xp</p>
-                        <p>121</p>
-                    </div>
-                    <div className="border-r-2 flex flex-col px-10 gap-2 border-stone-600">
-                        <p>rose</p>
-                        <p>23</p>
-                    </div>
+                    <ProfileInfo Svg={<ProgressBar value={4} max={10} />} text1="xp" text2="121"  />
+                    <ProfileInfo Svg={<ArrowBigUp />}  text1="rose" text2="23" />
                  
                 </div>
                 <div className="w-1/3 flex " >
-                    <div className="border-r-2 flex flex-col px-10  gap-2 border-stone-600">
-                        <p>country:</p>
-                        <p>india</p>
-                    </div>
-                    <div className="border-r-2 justify-center flex flex-col px-10 gap-2 border-stone-600">
-                        <p>socials</p>
-                        <ExternalLink size={20} />
-                    </div>
+                  
+                    <ProfileInfo Svg={<Flag/>} text1="country" text2="india" />
+                    <ProfileInfo Svg={<ExternalLink size={20} />} text1="socils" text2="insta" />
 
                 </div>
 
@@ -49,9 +36,45 @@ export const Main = () => {
         </div>
 
         <div className=" h-1/2 flex justify-around items-center">
-            <div className="h-1/2 bg-black w-1/4 rounded-xl border border-stone-700" ></div>
-            <div className="h-1/2 bg-black w-1/4 rounded-xl border border-stone-700" ></div>
-            <div className="h-1/2 bg-black w-1/4 rounded-xl border border-stone-700" ></div>
+            <div className="w-[70%] rounded-3xl flex justify-between p-10 h-min-10 bg-black border border-stone-700 h-[90%] items-center " >
+               
+                <div className="h-[80%] bg-black w-[32%] rounded-xl border border-stone-700" ></div>
+                <div className="h-[80%] bg-black w-[32%] rounded-xl border border-stone-700" ></div>
+                <div className="h-[80%] bg-black w-[32%] rounded-xl border border-stone-700" ></div>
+            </div>
+           
         </div>
+    </div>)
+}
+
+
+
+import React from 'react';
+
+interface ProgressBarProps {
+    value: number;
+    max: number;
+}
+
+const ProgressBar: React.FC<ProgressBarProps> = ({ value, max }) => {
+    const percentage = (value / max) * 100;
+    return (
+        <div className="w-full bg-gray-200 rounded-3xl h-2 border border-gray-300 overflow-hidden">
+            <div
+                className="bg-blue-600 h-full rounded-full"
+                style={{ width: `${percentage}%` }}
+            ></div>
+        </div>
+    );
+};
+
+export default ProgressBar;
+
+
+const ProfileInfo = ({Svg, text1, text2 }: { Svg: React.ReactNode, text1: String, text2: String }) => {
+    return (<div className="border-r-2 justify-between flex flex-col px-10 gap-2 border-stone-600">
+        {Svg}
+        <p>{text1}</p>
+        <p>{text2}</p>
     </div>)
 }
