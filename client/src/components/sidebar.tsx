@@ -1,11 +1,12 @@
-import { useState } from "react"
 import {AnimatePresence, motion} from "framer-motion"
+import { useRecoilState } from "recoil";
+import { sidebarOpenAtom } from "../atoms/atoms";
 export const Sidebar = () => {
-    const [sidebarOpen, setSidebarOpen] = useState(true);  
+    const [sidebarOpen, setSidebarOpen] = useRecoilState(sidebarOpenAtom);  
     return(<>
 
 
-        <div className={`flex fixed top-0 left-0 p-8 z-10 w-[${sidebarOpen? "250px": "5px"}] justify-end`}>
+        <div className={`flex fixed top-0 left-0 p-8 z-20 ${sidebarOpen && "w-[20vw]"} justify-end`}>
             <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -25,13 +26,13 @@ export const Sidebar = () => {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -20 }}
                     transition={{ duration: 0.5 }}
-                    className="flex flex-col gap-4 fixed top-0 left-[-20px] bg-black text-slate-300 p-8 rounded-3xl h-screen w-[250px]">
+                    className={`flex flex-col gap-4 z-10 fixed top-0 left-0 bg-black text-slate-300 rounded-r-3xl h-screen w-[21vw]`}>
 
-                    <div className="flex flex-col gap-4 mt-20">
-                        <p>inventory</p>
-                        <p>market</p>
-                        <p>settings</p>
-                        <p>log out</p>
+                    <div className="flex flex-col gap-4 mt-20 p-10">
+                        <p className="cursor-pointer hover:text-blue-300" >inventory</p>
+                        <p className="cursor-pointer hover:text-blue-300" >market</p>
+                        <p className="cursor-pointer hover:text-blue-300" >settings</p>
+                        <p className="cursor-pointer hover:text-blue-300" >log out</p>
                     </div>
                 </motion.div>
             }
