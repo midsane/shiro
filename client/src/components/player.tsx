@@ -42,8 +42,7 @@ export const PlayerCharacter = () => {
         const controlMovement = (e: any) => {
             const currentTime = new Date().getTime()
             let moveflag: boolean = false;
-            console.log("direction:",direction);
-            console.log("left frame:",leftFrame )
+   
             switch(e.key){
                 case "ArrowDown":
                     if(direction !== 4)moveflag = true;
